@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
+import android.provider.DocumentsContract
 import android.provider.MediaStore
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContract
@@ -14,6 +16,8 @@ fun ActivityResultLauncher<None>.launch() {
 }
 
 object None
+
+private const val TAG = "ActivityResultUtils"
 
 object ChooseFilesContract : ActivityResultContract<None?, List<Uri>>() {
     override fun createIntent(context: Context, input: None?): Intent {
@@ -32,6 +36,24 @@ object ChooseFilesContract : ActivityResultContract<None?, List<Uri>>() {
         return listOfNotNull(intent.data) + (0 until clipItemCount).mapNotNull {
             intent.clipData?.getItemAt(it)?.uri
         }
+    }
+}
+
+object StorageLocationContract : ActivityResultContract<Uri?, Uri?>() {
+    override fun createIntent(context: Context, input: Uri?): Intent {
+        return Intent(Intent.ACTION_OPEN_DOCUMENT_TREE).apply {
+            input?.let {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    putExtra(DocumentsContract.EXTRA_INITIAL_URI, input)
+                }
+            }
+        }
+    }
+
+    override fun parseResult(resultCode: Int, intent: Intent?): Uri? {
+        return if (intent != null && resultCode == Activity.RESULT_OK) {
+            intent.data
+        } else null
     }
 }
 

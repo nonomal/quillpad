@@ -1,35 +1,20 @@
 package org.qosp.notes.ui.editor
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.filterNotNull
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
 import me.msoul.datastore.defaultOf
-import org.qosp.notes.data.model.Attachment
-import org.qosp.notes.data.model.Note
-import org.qosp.notes.data.model.NoteColor
-import org.qosp.notes.data.model.NoteTask
-import org.qosp.notes.data.model.Notebook
+import org.qosp.notes.data.model.*
 import org.qosp.notes.data.repo.NoteRepository
 import org.qosp.notes.data.repo.NotebookRepository
 import org.qosp.notes.data.sync.core.SyncManager
 import org.qosp.notes.preferences.*
 import java.time.Instant
 import javax.inject.Inject
+import kotlin.time.Duration.Companion.milliseconds
 
 @HiltViewModel
 class EditorViewModel @Inject constructor(
@@ -182,7 +167,8 @@ class EditorViewModel @Inject constructor(
 
             syncJob?.cancel()
             syncJob = launch {
-                delay(300L) // To prevent multiple requests
+                delay(300.milliseconds) // To prevent multiple requests
+                Log.i(TAG, "update: Shouldn't multi update")
                 syncManager.updateOrCreate(new)
             }
         }
@@ -200,3 +186,5 @@ class EditorViewModel @Inject constructor(
         val moveCheckedItems: Boolean = true,
     )
 }
+
+private const val TAG = "EditorViewModel"
