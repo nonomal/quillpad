@@ -15,10 +15,10 @@ android {
     namespace 'org.qosp.notes'
     defaultConfig {
         applicationId "io.github.quillpad"
-        minSdkVersion 24
+        minSdkVersion 25
         targetSdkVersion 34
-        versionCode 23
-        versionName "1.4.17"
+        versionCode 24
+        versionName "1.5-dev"
 
         testInstrumentationRunner "org.qosp.notes.TestRunner"
 
@@ -72,7 +72,11 @@ android {
         jvmTarget = JavaVersion.VERSION_11
     }
 
-    compileOptions {
+    sourceSets {
+        androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
+    }
+
+        compileOptions {
         coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
@@ -80,6 +84,7 @@ android {
 
     buildFeatures {
         viewBinding true
+        dataBinding true
     }
 
     kapt {
@@ -102,10 +107,14 @@ repositories {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1'
     implementation libs.monitor
     implementation libs.junit.ktx
     testImplementation "junit:junit:4.13.2"
-    androidTestImplementation "androidx.test.ext:junit:1.1.4"
+    androidTestImplementation 'androidx.test:core:1.5.0'
+    androidTestImplementation "androidx.test.ext:junit:1.1.5"
+    androidTestImplementation "androidx.test:runner:1.5.2"
+    androidTestImplementation "androidx.test:rules:1.5.0"
     androidTestImplementation "androidx.test.espresso:espresso-core:3.5.0"
     coreLibraryDesugaring libs.coreLibraryDesugaring
     // AndroidX
