@@ -75,7 +75,6 @@
     <string name="preferences_cloud_service">Senkronizasyon hizmeti</string>
     <string name="preferences_cloud_service_disabled">Devre dışı</string>
     <string name="preferences_cloud_service_nextcloud">Nextcloud</string>
-    <string name="preferences_sync_experimental_warning">Senkronizasyon işlevi şimdilik deneyseldir.\nHatalarla karşılaşabilirsiniz.</string>
     <string name="preferences_nextcloud_limited_features">Unutmayın, Nextcloud Notes; etiketler, ekler, hatırlatıcılar, görevler gibi özellikleri desteklemez.</string>
     <string name="preferences_nextcloud_account">Nextcloud hesabı</string>
     <string name="preferences_nextcloud_instance_url">Nextcloud URL\'i</string>
@@ -294,5 +293,11 @@
         <item quantity="one">%d etiket şeçildi</item>
         <item quantity="other">%d etiket şeçildi</item>
     </plurals>
+  <string name="preferences_cloud_service_files">Dosya Depolama</string>
+  <string name="preferences_file_storage_info">Yerel depolamadan veya bir bulut sağlayıcıdan bir klasör seçin. Tüm notlar
+    Markdown dosyaları olarak saklanacaktır.
+  </string>
+  <string name="preferences_file_storage_location">Depolama yeri</string>
+  <string name="preferences_file_storage_select">Depolama yerini seçin</string>
     <string name="preferences_color_scheme_system">Sisteme uy</string>
 </resources>

@@ -76,8 +76,7 @@
     <string name="preferences_cloud_service">Synchronisierungsdienst</string>
     <string name="preferences_cloud_service_disabled">Deaktiviert</string>
     <string name="preferences_cloud_service_nextcloud">Nextcloud</string>
-    <string name="preferences_sync_experimental_warning">Synchronisierung is aktuell experimentell.\nEs können Fehler auftreten.</string>
-    <string name="preferences_nextcloud_limited_features">Aktuell unterstützt Nextcloud Notes keine Tags, Anhänge, Erinnerungen und weitere Funktionen.</string>
+  <string name="preferences_nextcloud_limited_features">Aktuell unterstützt Nextcloud Notes keine Tags, Anhänge, Erinnerungen und weitere Funktionen.</string>
     <string name="preferences_nextcloud_account">Nextcloud Konto</string>
     <string name="preferences_nextcloud_instance_url">URL der Nextcloud Instanz</string>
     <string name="preferences_nextcloud_set_your_credentials">Zugangsdaten einstellen</string>
@@ -295,5 +294,11 @@
         <item quantity="one">%d Tag ausgewählt</item>
         <item quantity="other">%d Tags ausgewählt</item>
     </plurals>
+  <string name="preferences_cloud_service_files">Dateispeicher</string>
+  <string name="preferences_file_storage_info">Wählen Sie einen Ordner aus dem lokalen Speicher oder von einem
+    Cloud-Anbieter aus. Alle Notizen werden als Markdown-Dateien gespeichert.
+  </string>
+  <string name="preferences_file_storage_location">Speicherort</string>
+    <string name="preferences_file_storage_select">Speicherort auswählen</string>
     <string name="preferences_color_scheme_system">System folgend</string>
 </resources>
