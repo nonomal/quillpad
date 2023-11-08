@@ -99,6 +99,7 @@ android {
         androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
     }
 
+    namespace 'org.qosp.notes'
 }
 
 repositories {

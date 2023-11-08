@@ -12,7 +12,7 @@ import org.qosp.notes.data.repo.IdMappingRepository
 import org.qosp.notes.data.repo.NoteRepository
 import org.qosp.notes.data.repo.NotebookRepository
 import org.qosp.notes.data.sync.nextcloud.NextcloudAPI
-import org.qosp.notes.data.sync.nextcloud.NextcloudManager
+import org.qosp.notes.data.sync.nextcloud.NextcloudBackend
 import retrofit2.Retrofit
 import retrofit2.create
 import javax.inject.Named
@@ -23,18 +23,9 @@ import javax.inject.Singleton
 object NextcloudModule {
     private val json = Json { ignoreUnknownKeys = true }
 
-    @OptIn(ExperimentalSerializationApi::class)
     @Provides
     @Singleton
-    fun provideNextcloud(): NextcloudAPI {
-        return Retrofit.Builder()
-            .baseUrl("http://localhost/") // Since the URL is configurable by the user we set it later during the request
-            .addConverterFactory(
-                json.asConverterFactory("application/json".toMediaType())
-            )
-            .build()
-            .create()
-    }
+    fun provideNextcloud() = getRetrofitted<NextcloudAPI>()
 
     @Provides
     @Singleton
@@ -43,5 +34,17 @@ object NextcloudModule {
         @Named(NO_SYNC) noteRepository: NoteRepository,
         @Named(NO_SYNC) notebookRepository: NotebookRepository,
         idMappingRepository: IdMappingRepository,
-    ) = NextcloudManager(nextcloudAPI, noteRepository, notebookRepository, idMappingRepository)
+    ) = NextcloudBackend(nextcloudAPI, noteRepository, notebookRepository, idMappingRepository)
+
+
+    @OptIn(ExperimentalSerializationApi::class)
+    private inline fun <reified T> getRetrofitted(): T {
+        return Retrofit.Builder()
+            .baseUrl("http://localhost/") // Since the URL is configurable by the user we set it later during the request
+            .addConverterFactory(
+                json.asConverterFactory("application/json".toMediaType())
+            )
+            .build()
+            .create()
+    }
 }
