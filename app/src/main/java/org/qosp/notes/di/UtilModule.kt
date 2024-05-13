@@ -22,6 +22,7 @@ import org.qosp.notes.data.sync.nextcloud.NextcloudBackend
 import org.qosp.notes.preferences.PreferenceRepository
 import org.qosp.notes.ui.reminders.ReminderManager
 import org.qosp.notes.ui.utils.ConnectionManager
+import javax.inject.Provider
 import javax.inject.Singleton
 
 @Module
@@ -51,10 +52,14 @@ object UtilModule {
         nextcloudManager: NextcloudBackend,
         storageManager: StorageBackend,
         app: Application,
+        notebookRepositoryProvider: Provider<NotebookRepository>,
+        noteRepositoryProvider: Provider<NoteRepository>,
     ) = SyncManager(
         preferenceRepository,
         idMappingRepository,
         ConnectionManager(context),
+        notebookRepositoryProvider,
+        noteRepositoryProvider,
         context,
         nextcloudManager,
         storageManager,

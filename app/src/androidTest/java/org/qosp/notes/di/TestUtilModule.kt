@@ -54,10 +54,14 @@ object TestUtilModule {
         idMappingRepository: IdMappingRepository,
         nextcloudBackend: NextcloudBackend,
         storageBackend: StorageBackend,
+        noteRepository: NoteRepository,
+        notebookRepository: NotebookRepository
     ): SyncManager = SyncManager(
         preferenceRepository,
         idMappingRepository,
         ConnectionManager(context),
+        notebookRepository,
+        noteRepository,
         context,
         nextcloudBackend,
         storageBackend,
